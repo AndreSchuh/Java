@@ -12,13 +12,28 @@ public class StreamsBigDecimalExemplo {
     public static void main(String[] args) {
         List<BigDecimal> numeros = geraSetComBigDecimal(10);
         imprimeSetComNumeros(numeros);
-        calculaSoma(numeros);
-        imprimeNumerosAcima50(numeros);
-        numeros0a50comDesconto20PorCento(numeros);
-        numeros30a60comDesconto30PorCento(numeros);
-        numeros50a100comDesconto35PorCento(numeros);
-        somaNumeros1QuartilE3Quartil(numeros);
-        imprimeNumeros2Quartil(numeros);
+
+
+        System.out.println("-----------------------------------");
+        System.out.println("A soma dos números é: " + calculaSoma(numeros));
+
+        System.out.println("-----------------------------------");
+        System.out.println("Números acima de 50 são: " + imprimeNumerosAcima50(numeros));
+
+        System.out.println("-----------------------------------");
+        System.out.println("Números acima de 50 com 20% de desconto são: " + numeros0a50comDesconto20PorCento(numeros));
+
+        System.out.println("-----------------------------------");
+        System.out.println("Números 30 a 60 com 30% de desconto: " +  numeros30a60comDesconto30PorCento(numeros));
+
+        System.out.println("-----------------------------------");
+        System.out.println("Números 50 a 100 com 35% de desconto: " + numeros50a100comDesconto35PorCento(numeros));
+
+        System.out.println("-----------------------------------");
+        System.out.println("Soma dos números do 1º e 3º quartis: " +  somaNumeros1QuartilE3Quartil(numeros));
+
+        System.out.println("-----------------------------------");
+        System.out.println("Imprime os números do 2º quartil: " +  imprimeNumeros2Quartil(numeros));
     }
 
     private static List<BigDecimal> geraSetComBigDecimal(int limit) {
@@ -27,7 +42,7 @@ public class StreamsBigDecimalExemplo {
         for(int i = 0; i< limit; i++) {
             numeros.add(BigDecimal.valueOf(random.nextDouble(100)).setScale(2, RoundingMode.HALF_UP));
         }
-//        return numeros;
+
         List<BigDecimal> nums = List.of(BigDecimal.valueOf(10),
                 BigDecimal.valueOf(15),
                 BigDecimal.valueOf(20),
@@ -58,57 +73,39 @@ public class StreamsBigDecimalExemplo {
 
     }
 
-    private static void calculaSoma(List<BigDecimal> numeros){
-        System.out.println("-----------------------------------");
-        System.out.println("A soma dos números é: ");
-        BigDecimal soma = numeros.stream()
+    public static BigDecimal calculaSoma(List<BigDecimal> numeros){
+        return numeros.stream()
                 .reduce(BigDecimal.ZERO, BigDecimal::add); // O reduce é uma função que vai associar o .ZERO e vai somar com ::add usando a stream
-        System.out.println(soma);
     }
 
-    private static void imprimeNumerosAcima50(List<BigDecimal> numeros){
-        System.out.println("-----------------------------------");
-        System.out.println("Números acima de 50 são: ");
-
-        numeros.stream()
+    private static List<BigDecimal> imprimeNumerosAcima50(List<BigDecimal> numeros){
+        return numeros.stream()
                 .filter(n -> n.compareTo(BigDecimal.valueOf(50)) > 0) // O filter como o nome já diz vai usar esse método dentro dele para fazer algo parecido com if else
-                .forEach(System.out::println); // imprime cada número
+                .toList();
     }
 
-    private static void numeros0a50comDesconto20PorCento(List<BigDecimal> numeros){
-        System.out.println("-----------------------------------");
-        System.out.println("Números 0 a 50 com 20% de desconto: ");
-
-        numeros.stream()
-                .filter(n -> n.compareTo(BigDecimal.valueOf(50)) <= 0) // Faz o "if else" de número entre 0 e 50
-//                .map(n -> n.multiply(BigDecimal.valueOf(0.8))) // Aplica a cada elemento passado pelo filtro o desconto multiplicando por 0.8
-                .forEach(System.out::println);
+    private static List<BigDecimal> numeros0a50comDesconto20PorCento(List<BigDecimal> numeros){
+        return numeros.stream()
+                .filter(n -> n.compareTo(BigDecimal.valueOf(0)) >= 0 && n.compareTo(BigDecimal.valueOf(50)) <= 0) // Faz o "if else" de número entre 0 e 50
+                .map(n -> n.multiply(BigDecimal.valueOf(0.8))) // Aplica a cada elemento passado pelo filtro o desconto multiplicando por 0.8
+                .toList();
     }
 
-    private static void numeros30a60comDesconto30PorCento(List<BigDecimal> numeros){
-        System.out.println("-----------------------------------");
-        System.out.println("Números 30 a 60 com 30% de desconto: ");
-
-        numeros.stream()
-                .filter(n -> n.compareTo(BigDecimal.valueOf(60)) <= 30)
-//                .map(n -> n.multiply(BigDecimal.valueOf(0.7)))
-                .forEach(System.out::println);
+    private static List<BigDecimal> numeros30a60comDesconto30PorCento(List<BigDecimal> numeros){
+        return numeros.stream()
+                .filter(n -> n.compareTo(BigDecimal.valueOf(30)) >= 0 && n.compareTo(BigDecimal.valueOf(60)) <= 0)
+                .map(n -> n.multiply(BigDecimal.valueOf(0.7)))
+                .toList();
     }
 
-    private static void numeros50a100comDesconto35PorCento(List<BigDecimal> numeros){
-        System.out.println("-----------------------------------");
-        System.out.println("Números 50 a 100 com 35% de desconto: ");
-
-        numeros.stream()
-                .filter(n -> n.compareTo(BigDecimal.valueOf(100)) <= 50)
-//                .map(n -> n.multiply(BigDecimal.valueOf(0.65)))
-                .forEach(System.out::println);
+    private static List<BigDecimal> numeros50a100comDesconto35PorCento(List<BigDecimal> numeros){
+        return numeros.stream()
+                .filter(n -> n.compareTo(BigDecimal.valueOf(50)) >= 0 && n.compareTo(BigDecimal.valueOf(100)) <= 0)
+                .map(n -> n.multiply(BigDecimal.valueOf(0.65)))
+                .toList();
     }
 
-    private static void somaNumeros1QuartilE3Quartil(List<BigDecimal> numeros){
-        System.out.println("-----------------------------------");
-        System.out.println("Soma dos números do 1º e 3º quartis: ");
-
+    private static BigDecimal somaNumeros1QuartilE3Quartil(List<BigDecimal> numeros){
         BigDecimal soma1Quartil = numeros.stream()
                 .filter(n -> n.compareTo(BigDecimal.valueOf(0)) <= 0 && n.compareTo(BigDecimal.valueOf(25)) <= 0)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
@@ -117,16 +114,12 @@ public class StreamsBigDecimalExemplo {
                 .filter(n -> n.compareTo(BigDecimal.valueOf(50)) <= 0 && n.compareTo(BigDecimal.valueOf(75)) <= 0)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        BigDecimal somaTotal = soma1Quartil.add(soma3Quartil);
-        System.out.println(somaTotal);
+        return soma1Quartil.add(soma3Quartil);
     }
 
-    private static void imprimeNumeros2Quartil(List<BigDecimal> numeros){
-        System.out.println("-----------------------------------");
-        System.out.println("Imprime os números do 2º quartil: ");
-
-        numeros.stream()
+    private static List<BigDecimal> imprimeNumeros2Quartil(List<BigDecimal> numeros){
+        return numeros.stream()
                 .filter(n -> n.compareTo(BigDecimal.valueOf(25)) > 0 && n.compareTo(BigDecimal.valueOf(50)) <= 0)
-                .forEach(System.out::println);
+                .toList();
     }
 }
