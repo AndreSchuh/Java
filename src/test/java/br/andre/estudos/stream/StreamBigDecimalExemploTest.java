@@ -1,14 +1,15 @@
 package br.andre.estudos.stream;
+
 import br.andre.estudos.streams.StreamsBigDecimalExemplo;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import java.math.BigDecimal;
-import java.util.List;
 
 public class StreamBigDecimalExemploTest {
 
@@ -71,15 +72,13 @@ public class StreamBigDecimalExemploTest {
     @Test
     void numeros50a100comDesconto35PorCento(){
        List<BigDecimal> filtroComDescontoEsperado = List.of(
-                BigDecimal.valueOf(32.50),
-                BigDecimal.valueOf(39.00),
-                BigDecimal.valueOf(45.50));
-//        assertEquals(filtroComDescontoEsperado, StreamsBigDecimalExemplo.numeros50a100comDesconto35PorCento(numeros));
-        List<BigDecimal> resultado = StreamsBigDecimalExemplo.numeros50a100comDesconto35PorCento(numeros);
-
-        for (int i = 0; i < filtroComDescontoEsperado.size(); i++) {
-            assertEquals(0, filtroComDescontoEsperado.get(i).compareTo(resultado.get(i)));
-        }
+                BigDecimal.valueOf(32.5).setScale(2, RoundingMode.HALF_UP),
+                BigDecimal.valueOf(39).setScale(2, RoundingMode.HALF_UP),
+                BigDecimal.valueOf(45.5).setScale(2, RoundingMode.HALF_UP));
+        assertEquals(filtroComDescontoEsperado, StreamsBigDecimalExemplo.numeros50a100comDesconto35PorCento(numeros));
+//        for (int i = 0; i < filtroComDescontoEsperado.size(); i++) {
+//            assertEquals(0, filtroComDescontoEsperado.get(i).compareTo(resultado.get(i)));
+//        }
     }
 
     @Test
