@@ -27,6 +27,7 @@ Utilização de conceitos básicos na aprendizagem do Java.
 - Manipulação de Streams.
 - Lambda Expressions.
 - Manipulação de Arquivos.
+- Regex
 - Manipulação de Datas.
 - Objetos e Classes.
 - Herança e Polimorfismo.
