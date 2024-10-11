@@ -3,6 +3,8 @@ package br.andre.estudos.files;
 import java.io.*;
 import java.util.Scanner;
 
+import static java.time.Clock.system;
+
 public class ArquivosExercise {
 
     static String nomeArquivo;
@@ -48,6 +50,9 @@ public class ArquivosExercise {
                         delete("archive.txt");
                     }
                     break;
+                case 5:
+                    System.out.println("SAINDO!");
+                    System.exit(0);
             }
         }while(true);
     }
