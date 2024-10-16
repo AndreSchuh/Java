@@ -76,6 +76,19 @@ public class ArquivosExercise {
         }
     }
 
+    public static void escreverNoArquivo2(String fileName, String texto, boolean append) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, append));
+            writer.write(texto);
+            writer.newLine();
+            writer.close();
+            System.out.println("Escrita concluída no arquivo " + fileName);
+        } catch (IOException e) {
+            System.out.println("Ocorreu um erro durante a escrita.");
+            e.printStackTrace();
+        }
+    }
+
     public static boolean criaArquivo(String nomeArquivo){
         try {
             File arquivo = new File(nomeArquivo);
@@ -91,6 +104,20 @@ public class ArquivosExercise {
             System.out.println("Ocorreu um erro ao criar o arquivo.");
             e.printStackTrace();
             return false;
+        }
+    }
+ public static void criaArquivo2(String nomeArquivo){
+        try {
+            File arquivo = new File(nomeArquivo);
+
+            if (arquivo.createNewFile()) {
+                System.out.println("Arquivo criado: " + arquivo.getName());
+            } else {
+                System.out.println("O arquivo já existe.");
+            }
+        } catch (IOException e) {
+            System.out.println("Ocorreu um erro ao criar o arquivo.");
+            e.printStackTrace();
         }
     }
 
