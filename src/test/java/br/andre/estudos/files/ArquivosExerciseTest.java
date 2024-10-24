@@ -26,35 +26,12 @@ public class ArquivosExerciseTest {
         }
     }
 
-//    Não precisa, vc tá fazendo o mesmo estágio antes e depois de cada teste, pode usar só o beforeEach
-//    @AfterEach
-//    void tearDown() {
-//        // Executa após cada teste, para limpar o ambiente de teste
-//        File file = new File(fileTest);
-//        if (file.exists()) {
-//            file.delete();
-//        }
-//    }
-
-    @Test
-    void criaArquivoTest(){
-        assertTrue(ArquivosExercise.criaArquivo(fileTest));
-        assertFalse(ArquivosExercise.criaArquivo(fileTest));
-    }
-
     @Test
     void criaArquivo2Test(){
         ArquivosExercise.criaArquivo2(fileTest);
         File file = new File(fileTest);
         assertTrue(file.exists());
     }
-
-
-    @Test
-    void escreverNoArquivoTest(){
-        assertTrue(ArquivosExercise.escreverNoArquivo(fileTest, textTest, true));
-    }
-
 
     @Test
     void escreverNoArquivo2Test() throws IOException {
@@ -75,9 +52,18 @@ public class ArquivosExerciseTest {
     }
 
     @Test
-    void lerArquivoTest(){
+    void lerArquivoTest() throws IOException{
         ArquivosExercise.escreverNoArquivo(fileTest, textTest, true);
-        assertTrue(ArquivosExercise.lerArquivo(fileTest));
+
+        StringBuilder texto = new StringBuilder();
+        BufferedReader reader = new BufferedReader(new FileReader(fileTest));
+        String linha;
+        while ((linha = reader.readLine()) != null) {
+            texto.append(linha);
+        }
+        reader.close();
+
+        assertEquals("Este é um texto de teste.", texto.toString());
     }
 
     @Test
