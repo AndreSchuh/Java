@@ -137,6 +137,23 @@ public class ArquivosExercise {
         }
     }
 
+    public static String lerArquivo2(String fileName) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+            String linha;
+            StringBuilder stringBuilder = new StringBuilder();
+            while ((linha = reader.readLine()) != null) {
+                stringBuilder.append(linha);
+            }
+            reader.close();
+            return stringBuilder.toString();
+        } catch (IOException e) {
+            System.out.println("Ocorreu um erro durante a leitura.");
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static boolean excluiArquivo(String fileName) {
         File file = new File(fileName);
         if (file.delete()) {
