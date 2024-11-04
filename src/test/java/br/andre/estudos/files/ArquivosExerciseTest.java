@@ -54,24 +54,9 @@ public class ArquivosExerciseTest {
     @Test
     void lerArquivoTest() throws IOException{
 
-        //Nesse bloco todinho vc tá fazendo um teste do "lerArquivo" sem chamar o método lerArquivo?
-        // O teste precisa sempre chamar o método que ele se propoe a testar, para garantir que o retorno do método está condizente com o que vc espera.
-        ArquivosExercise.escreverNoArquivo(fileTest, textTest, true);
-
-        StringBuilder texto = new StringBuilder();
-        BufferedReader reader = new BufferedReader(new FileReader(fileTest));
-        String linha;
-        while ((linha = reader.readLine()) != null) {
-            texto.append(linha);
-        }
-        reader.close();
-
-        assertEquals("Este é um texto de teste.", texto.toString());
-
-        
-
         //-----------------Segue solução proposta ------------------------------------------
         String actualContent = ArquivosExercise.lerArquivo2(fileTest);       // <---- aqui estou chamando o lerArquivo2
+
         assertEquals(textTest, actualContent);
 
         //como pode ver criei um método lerArquivo2.
