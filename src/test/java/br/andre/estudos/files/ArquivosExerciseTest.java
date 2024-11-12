@@ -54,6 +54,7 @@ public class ArquivosExerciseTest {
     @Test
     void lerArquivoTest() throws IOException{
 
+        ArquivosExercise.escreverNoArquivo2(fileTest,"Este é um texto de teste.", true);
         //-----------------Segue solução proposta ------------------------------------------
         String actualContent = ArquivosExercise.lerArquivo2(fileTest);       // <---- aqui estou chamando o lerArquivo2
 
