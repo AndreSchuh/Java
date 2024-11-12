@@ -43,7 +43,7 @@ public class Exercicio02Datas {
                     System.out.printf("Hora inicial: %s \n", formataData(dataUsuario));
                     break;
                 case 3:
-                    System.out.printf("Hora final: %s \n", formataData(dataUsuario).with(LocalTime.MAX));
+                    System.out.printf("Hora final: %s \n", horaFinalData(dataUsuario));
                     break;
                 case 4:
                     System.out.print("Digite o número de meses para somar na data: ");
@@ -101,6 +101,10 @@ public class Exercicio02Datas {
         LocalDateTime dataFinal = dataFormatada.plusMonths(mesesParaSomar).atStartOfDay();
 
         return dataFinal;
+    }
+
+    static LocalDateTime horaFinalData (String dataUsuario){
+        return  formataData(dataUsuario).with(LocalTime.MAX);
     }
 
     static LocalDateTime mesesParaSubtrairData (String dataUsuario, int mesesParaSubtrair){

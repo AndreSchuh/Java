@@ -24,6 +24,12 @@ public class Exercicio02DatasTest {
     }
 
     @Test
+    void horaFinalData(){
+        LocalDateTime horaEsperada = LocalDateTime.of(2008, 9, 9, 23, 59,59, 999999999);
+        assertEquals(Exercicio02Datas.horaFinalData(dataExemplo), horaEsperada);
+    }
+
+    @Test
     void mesesParaSubtrairDataTest(){
         LocalDateTime dataEsperada = LocalDateTime.of(2008, 06, 9, 00, 00);
         assertEquals(dataEsperada, Exercicio02Datas.mesesParaSubtrairData(dataExemplo, 3));
