@@ -2,7 +2,6 @@
 * [Projeto de Estudos em Java](#projeto-de-estudos-em-java-)
     * [Manipulação de Mapas](#manipulação-de-mapas)
     * [Collections](#collections)
-      * [Interface `Collection`](#interface-collection)
         * [Principais métodos da interface `Collection`:](#principais-métodos-da-interface-collection)
       * [Subinterfaces de `Collection`](#subinterfaces-de-collection)
         * [1. `List`](#1-list)
