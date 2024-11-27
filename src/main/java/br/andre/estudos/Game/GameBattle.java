@@ -4,13 +4,16 @@ package br.andre.estudos.Game;
 import java.util.Random;
 import java.util.Scanner;
 
+import static java.lang.Math.random;
+
 public class GameBattle {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
+        int dano;
 
-        Warrior warrior = new Warrior("Thor");
-        Wizard wizard = new Wizard("Merlin");
+        Warrior warrior = new Warrior("Thor", 200,30);
+        Wizard wizard = new Wizard("Merlin", 108, 40);
 
         while (true) {
             System.out.println("\n--- MENU DE BATALHA ---");
@@ -30,10 +33,12 @@ public class GameBattle {
                     wizard.displayStatus();
                     break;
                 case 2:
-                    warrior.attack(wizard);
+                    dano = random.nextInt(warrior.poder + 1);
+                    warrior.attack(wizard, dano);
                     break;
                 case 3:
-                    wizard.attack(warrior);
+                    dano = random.nextInt(wizard.poder + 1);
+                    wizard.attack(warrior, dano);
                     break;
                 case 4:
                     warrior.specialMove();
@@ -48,13 +53,12 @@ public class GameBattle {
                     System.out.println("Opção inválida!");
             }
 
-            // Verificar se algum personagem morreu
             if (!warrior.isAlive() || !wizard.isAlive()) {
                 System.out.println("\n🏆 BATALHA TERMINADA! 🏆");
 
-                if (!warrior.isAlive() && !wizard.isAlive()) {
+                if (warrior.isAlive() && wizard.isAlive()) {
                     System.out.println("🤝 Empate! Ambos os personagens morreram simultaneamente!");
-                } else if (!warrior.isAlive()) {
+                } else if (warrior.isAlive()) {
                     System.out.println("🧙 Merlin (Wizard) VENCEU a batalha!");
                     System.out.println("💀 Thor (Warrior) foi derrotado!");
                 } else {
