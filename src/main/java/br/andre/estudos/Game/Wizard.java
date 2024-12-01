@@ -2,33 +2,24 @@ package br.andre.estudos.Game;
 
 import java.util.Random;
 
-public class Wizard {
+class Wizard extends Character implements SpecialMove{
 
     Random random = new Random();
 
-    protected String nome;
-    protected int saude;
-    protected int poder;
+    private int dano;
 
     public Wizard(String nome, int saude, int poder) {
-        this.nome = nome;
-        this.saude = saude;
-        this.poder = poder;
+        super(nome, saude, poder);
     }
 
-    public void displayStatus(){
-        System.out.println("Nome: " + nome);
-        System.out.println("Saúde: " + saude);
-        System.out.println("Poder: " + poder);
-    }
-
-    public void attack(Warrior warrior, int dano){
-        warrior.saude -= dano;
+    public void attack(Character character){
+        dano = random.nextInt(poder);
+        character.saude -= dano;
         System.out.println("ATAQUE DE " + nome + " com " + dano + " de dano");
-        System.out.println("SAÚDE DE " + warrior.nome + ": " + warrior.saude);
+        System.out.println("SAÚDE DE " + character.nome + ": " + character.saude);
     }
 
-    public void specialMove(){
+    public void performSpecialMove(){
         saude += random.nextInt(30);
         System.out.println("Saúde de " + nome + " aumentada para: " + saude);
     }

@@ -1,35 +1,28 @@
 package br.andre.estudos.Game;
 
-class Warrior {
+import java.util.Random;
 
-    protected String nome;
-    protected int saude;
-    protected int poder;
+class Warrior extends Character implements SpecialMove {
 
-    public Warrior(String nome, int saude, int poder) {
-        this.nome = nome;
-        this.saude = saude;
-        this.poder = poder;
+    Random random = new Random();
+
+    private int dano;
+
+    public Warrior(String nome, int poder, int saude) {
+        super(nome, poder, saude);
     }
 
-    public void displayStatus(){
-        System.out.println("Nome: " + nome);
-        System.out.println("Saúde: " + saude);
-        System.out.println("Poder: " + poder);
-    }
-
-    public void attack(Wizard wizard, int dano){
-        wizard.saude -= dano;
+    @Override
+    public void attack(Character character){
+        dano = random.nextInt(poder);
+        character.saude -= dano;
         System.out.println("ATAQUE DE " + nome + " com " + dano + " de dano");
-        System.out.println("SAÚDE DE " + wizard.nome + ": " + wizard.saude);
+        System.out.println("SAÚDE DE " + character.nome + ": " + character.saude);
     }
 
-    public void specialMove(){
+    @Override
+    public void performSpecialMove(){
         poder *= 2;
         System.out.println("Poder de " + nome + " duplicado!");
-    }
-
-    public boolean isAlive(){
-        return saude > 0;
     }
 }

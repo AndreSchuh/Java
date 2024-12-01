@@ -9,8 +9,6 @@ import static java.lang.Math.random;
 public class GameBattle {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Random random = new Random();
-        int dano;
 
         Warrior warrior = new Warrior("Thor", 200,30);
         Wizard wizard = new Wizard("Merlin", 108, 40);
@@ -33,18 +31,16 @@ public class GameBattle {
                     wizard.displayStatus();
                     break;
                 case 2:
-                    dano = random.nextInt(warrior.poder + 1);
-                    warrior.attack(wizard, dano);
+                    warrior.attack(wizard);
                     break;
                 case 3:
-                    dano = random.nextInt(wizard.poder + 1);
-                    wizard.attack(warrior, dano);
+                    wizard.attack(warrior);
                     break;
                 case 4:
-                    warrior.specialMove();
+                    warrior.performSpecialMove();
                     break;
                 case 5:
-                    wizard.specialMove();
+                    wizard.performSpecialMove();
                     break;
                 case 0:
                     System.out.println("Saindo do jogo...");
@@ -56,7 +52,7 @@ public class GameBattle {
             if (!warrior.isAlive() || !wizard.isAlive()) {
                 System.out.println("\n🏆 BATALHA TERMINADA! 🏆");
 
-                if (warrior.isAlive() && wizard.isAlive()) {
+                if (!warrior.isAlive() && !wizard.isAlive()) {
                     System.out.println("🤝 Empate! Ambos os personagens morreram simultaneamente!");
                 } else if (warrior.isAlive()) {
                     System.out.println("🧙 Merlin (Wizard) VENCEU a batalha!");
