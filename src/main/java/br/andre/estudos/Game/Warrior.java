@@ -26,14 +26,17 @@ class Warrior extends Character implements SpecialMove {
         boolean chanceAleatoria = random.nextBoolean();
 
 
-        System.out.println("Poder de " + nome + " duplicado por: " + chanceAleatoria + " rodadas");
 
         if(rodadasPoderDuplicado == false && chanceAleatoria == true){
             poder *= 2;
             rodadasPoderDuplicado = true;
+            System.out.println("Poder duplicado ativado.");
         }else if(rodadasPoderDuplicado == true && chanceAleatoria == false){
             poder /= 2;
             rodadasPoderDuplicado = false;
+            System.out.println("Poder duplicado desativado.");
+        } else {
+            System.out.println("Poder mantido.");
         }
     }
 }
